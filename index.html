@@ -231,7 +231,7 @@
 
         /* HAUPTINHALT (Die Polaroids) */
         .main-content { 
-            max-width: 900px; width: 90%; margin: 0 auto; 
+            max-width: 1200px; width: 95%; margin: 0 auto; 
             opacity: 0; transform: translateY(50px); 
             transition: opacity 1s ease, transform 1s ease; 
             display: none; text-align: center; padding-bottom: 60px; color: white; 
@@ -239,10 +239,60 @@
         .main-content.visible { display: block; opacity: 1; transform: translateY(0); }
         .birthday-title { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 3.8rem; color: #fecfef; margin-top: 50px; margin-bottom: 10px; }
         .subtitle { font-size: 1.3rem; color: #fecfef; margin-bottom: 50px; font-style: italic; opacity: 0.9; }
-        .gallery-title { font-size: 2rem; color: #fecfef; margin-top: 60px; margin-bottom: 50px; }
+        .gallery-title { font-size: 2rem; color: #fecfef; margin-top: 60px; margin-bottom: 40px; }
         
-        .grid-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; justify-items: center; padding: 20px; }
-        .polaroid { background: white; padding: 15px 15px 30px 15px; box-shadow: 0 12px 25px rgba(0,0,0,0.3); border-radius: 2px; transition: transform 0.3s ease; max-width: 230px; color: #333; }
+        /* OPTIMIERTER CONTAINER FÜR DIE PRE-GALLERY */
+        .gallery-container-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .gallery-pinguin-wrapper {
+            width: 200px; 
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .gallery-pinguin-wrapper img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            animation: pinguinSanft 5s ease-in-out infinite;
+        }
+
+        @keyframes pinguinSanft {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.02) rotate(2deg); }
+        }
+
+        /* SAUBERE GRID GALERIE - VERHINDERT EINZELREIHEN-STAUCHUNG */
+        .grid-gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 35px; 
+            justify-items: center; 
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .polaroid { 
+            background: white; 
+            padding: 15px 15px 30px 15px; 
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3); 
+            border-radius: 2px; 
+            transition: transform 0.3s ease; 
+            width: 100%;
+            max-width: 250px; 
+            color: #333; 
+            box-sizing: border-box;
+        }
         .polaroid:nth-child(3n+1) { transform: rotate(-3deg); }
         .polaroid:nth-child(3n+2) { transform: rotate(2deg); }
         .polaroid:nth-child(3n+3) { transform: rotate(-1deg); }
@@ -250,7 +300,7 @@
         .polaroid img { width: 100%; height: 280px; object-fit: cover; border: 1px solid #eee; background-color: #f5f5f5; }
         .polaroid .caption { margin-top: 15px; font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 1.1rem; color: #444; }
         
-        /* BOX DESIGN */
+        /* BOX DESIGN & DEKO */
         .reasons-section {
             margin-top: 80px;
             display: flex;
@@ -259,6 +309,132 @@
             position: relative;
             min-height: 750px;
             width: 100%;
+            overflow: hidden;
+        }
+
+        /* ZEPPELIN */
+        .zeppelin-container {
+            position: absolute;
+            bottom: 105px;
+            left: -600px; 
+            display: flex;
+            align-items: center;
+            z-index: 3; 
+            animation: zeppelinFlug 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes zeppelinFlug {
+            0% { left: -600px; transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { left: calc(100% + 600px); transform: translateY(0); }
+        }
+
+        .zeppelin-body {
+            width: 140px;
+            height: 75px;
+            background: linear-gradient(135deg, #cc3333 0%, #8a1f29 100%);
+            border-radius: 50% 60% 60% 50%;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset -5px -5px 15px rgba(0,0,0,0.3);
+            border: 2px solid #d4af37;
+        }
+
+        .zeppelin-body::before {
+            content: '';
+            position: absolute;
+            top: 10%; left: 15%;
+            width: 70%; height: 80%;
+            border-radius: 50%;
+            border-right: 4px solid #d4af37;
+            border-left: 2px solid #d4af37;
+            opacity: 0.6;
+        }
+
+        .zeppelin-gondel {
+            position: absolute;
+            bottom: -8px; left: 40px;
+            width: 45px; height: 14px;
+            background: #d4af37;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .zeppelin-flosse {
+            position: absolute;
+            left: -12px; top: 15px;
+            width: 20px; height: 45px;
+            background: #8a1f29;
+            border: 1px solid #d4af37;
+            border-radius: 5px;
+            transform: skewY(10deg);
+        }
+
+        .banner-ropes {
+            width: 35px;
+            height: 30px;
+            position: relative;
+        }
+        .banner-ropes::before, .banner-ropes::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 2px;
+            background: #d4af37;
+        }
+        .banner-ropes::before { top: 6px; transform: rotate(15deg); transform-origin: left top; }
+        .banner-ropes::after { bottom: 6px; transform: rotate(-15deg); transform-origin: left bottom; }
+
+        .zeppelin-banner {
+            background: linear-gradient(135deg, #fff9e6 0%, #f7e7c4 100%);
+            padding: 8px 22px;
+            border: 2px solid #d4af37;
+            border-radius: 4px;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
+            white-space: nowrap;
+            animation: bannerWehen 1.5s ease-in-out infinite alternate;
+            transform-origin: left center;
+        }
+
+        .zeppelin-banner span {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 1.8rem;
+            color: #6b1d2f;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+        }
+
+        @keyframes bannerWehen {
+            0% { transform: rotate(-2deg) skewY(-1deg); }
+            100% { transform: rotate(3deg) skewY(2deg); }
+        }
+        
+        /* DEKO-ELEMENTE RECHTS UND LINKS NEBEN DER BOX */
+        .box-deko-container {
+            position: absolute;
+            top: 15%;
+            width: 200px;
+            text-align: center;
+            color: #fecfef;
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 2rem;
+            opacity: 0.85;
+            pointer-events: none;
+            animation: sanftesSchweben 4s ease-in-out infinite;
+            z-index: 2;
+        }
+        .box-deko-left { left: 5%; }
+        .box-deko-right { right: 5%; animation-delay: 2s; }
+
+        .deko-herz {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(254, 207, 239, 0.6));
+        }
+
+        @keyframes sanftesSchweben {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
         
         .box-perspective-wrapper {
@@ -266,7 +442,7 @@
             bottom: 140px;
             width: 360px;
             height: 300px;
-            z-index: 5;
+            z-index: 5; 
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -401,7 +577,7 @@
             padding: 50px 45px 80px 45px;
             box-sizing: border-box;
             display: none;
-            z-index: 3; 
+            z-index: 4; 
             text-align: center;
             justify-content: center;
             align-items: center;
@@ -577,9 +753,7 @@
         }
 
         /* Animationen für das laufende System */
-        .music-playing .vinyl-record {
-            animation: spinVinyl 8s linear infinite;
-        }
+        .music-playing .vinyl-record { animation: spinVinyl 8s linear infinite; }
         .music-playing .turntable-arm::before { transform: rotate(-5deg); }
         .music-playing .turntable-arm::after { transform: rotate(-5deg); }
 
@@ -591,12 +765,15 @@
         /* PORTAL-ZONE FÜR DEN ZEITSTRAHL */
         .portal-section {
             margin-top: 120px;
-            padding: 60px 20px;
+            padding: 60px 20px 80px 20px;
             text-align: center;
             background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(212,175,55,0.15) 100%);
             width: 100%;
             box-sizing: border-box;
             border-radius: 30px 30px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .portal-section h2 {
             font-family: 'Brush Script MT', cursive, sans-serif;
@@ -609,6 +786,7 @@
             font-size: 1.1rem;
             opacity: 0.8;
             margin-bottom: 40px;
+            max-width: 700px;
         }
         .portal-btn {
             background: linear-gradient(135deg, #d4af37 0%, #b89324 100%);
@@ -621,11 +799,274 @@
             cursor: pointer;
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 60px;
         }
         .portal-btn:hover {
-            transform: scale(1.05);
             box-shadow: 0 15px 30px rgba(212,175,55,0.4);
         }
+
+        /* ─── HOCHWERTIGES 3D BUCH DESIGN MIT ZENTRALER KICK-NAVIGATION ─── */
+        .book-section-wrapper {
+            width: 100%;
+            margin-top: 80px;
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .book-container-title {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 50px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+
+        /* Das zentrierte Buch-Skelett */
+        .book {
+            position: relative;
+            width: 420px;  
+            height: 560px; 
+            perspective: 2000px;
+            transform-style: preserve-3d;
+            margin-bottom: 40px;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(0px); 
+        }
+
+        /* Sobald aufgeschlagen verschiebt sich die Buchachse nach rechts */
+        .book.opened {
+            transform: translateX(210px);
+        }
+
+        .book .pages {
+            width: 100%; height: 100%;
+            position: absolute;
+            z-index: 10;
+        }
+
+        .book .page-wrapper {
+            position: absolute;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+        }
+
+        .book .page-front, .book .page-back {
+            position: absolute;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            padding: 50px 35px; 
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: #3b0a11;
+            backface-visibility: hidden;
+            border-radius: 0 14px 14px 0;
+            box-shadow: inset -1px 0px 2px rgba(150, 150, 150, 0.2), 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        .book .page-front {
+            background: linear-gradient(to right, #e8e4de 0%, #fffdfa 100%);
+            border-left: 12px solid #50121e;
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+
+        .book .page-back {
+            background: linear-gradient(to left, #e8e4de 0%, #fffdfa 100%);
+            border-right: 12px solid #50121e;
+            z-index: 1;
+            transform: rotateY(180deg);
+            border-radius: 14px 0 0 14px;
+        }
+
+        /* KLASSISCHE RECHTS/LINKS NAVIGATION OVERLAYS */
+        .book .page-click-zone-left,
+        .book .page-click-zone-right {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            cursor: pointer;
+            z-index: 30; 
+        }
+        .book .page-click-zone-left { left: -100%; }
+        .book .page-click-zone-right { right: 0; }
+
+        .book:not(.opened) .page-click-zone-right { left: 0; width: 100%; }
+        .book:not(.opened) .page-click-zone-left { display: none; }
+
+        .book h3 {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 2.8rem; 
+            margin: 0 0 25px 0;
+            color: #6b1d2f;
+            border-bottom: 2px dashed rgba(212,175,55,0.6);
+            padding-bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .book p {
+            font-size: 1.3rem; 
+            line-height: 1.7;
+            font-style: italic;
+            text-align: center;
+            margin: 0;
+            color: #4a4230;
+            width: 100%;
+        }
+
+        .book .flip-hint {
+            position: absolute;
+            bottom: 25px; right: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #b89324;
+        }
+        
+        .book .page-back .flip-hint {
+            right: auto; left: 30px;
+        }
+
+        .book .page-wrapper.w1 .page-front {
+            background: linear-gradient(135deg, #8a1f34 0%, #50121e 100%);
+            border: 3px solid #d4af37;
+            border-left: 12px solid #330a12;
+            color: #d4af37;
+            justify-content: center;
+        }
+        .book .page-wrapper.w1 .page-front h2 {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 3.8rem;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+        .book .page-wrapper.w1 .page-front .cover-heart {
+            font-size: 4.5rem;
+            filter: drop-shadow(0 0 15px rgba(212,175,55,0.6));
+            margin-top: 20px;
+        }
+
+        .page-wrapper.w1 { z-index: 6; }
+        .page-wrapper.w2 { z-index: 5; }
+        .page-wrapper.w3 { z-index: 4; }
+
+        .page-wrapper.flipped.w1 { transform: rotateY(-180deg); z-index: 1; }
+        .page-wrapper.flipped.w2 { transform: rotateY(-180deg); z-index: 2; }
+        .page-wrapper.flipped.w3 { transform: rotateY(-180deg); z-index: 3; }
+
+        /* SÜRPRIZ VIDEO BUTTON NEBEN DEM BUCH */
+        .video-trigger-sidebar {
+            position: absolute;
+            top: 50%;
+            right: -190px;
+            transform: translateY(-50%) scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 100;
+        }
+        .video-trigger-sidebar.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(-50%) scale(1);
+        }
+
+        .pulsing-video-btn {
+            width: 110px;
+            height: 110px;
+            background: radial-gradient(circle, #d4af37 0%, #b89324 100%);
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.2rem;
+            position: relative;
+            animation: buttonPulsieren 2s infinite;
+            transition: transform 0.2s;
+        }
+        .pulsing-video-btn:hover {
+            transform: scale(1.1);
+        }
+        .video-btn-label {
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes buttonPulsieren {
+            0% { box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 0 0 rgba(212,175,55,0.6); }
+            70% { box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 0 20px rgba(212,175,55,0); }
+            100% { box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 0 0 rgba(212,175,55,0); }
+        }
+
+        /* VOLLBILD VIDEO OVERLAY (KINOMODUS) */
+        .video-overlay-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .video-overlay-modal.open { display: flex; opacity: 1; }
+
+        .video-wrapper-inner {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            border: 3px solid #d4af37;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .video-wrapper-inner video { width: 100%; height: 100%; object-fit: contain; }
+
+        .close-video-btn {
+            position: absolute;
+            top: -50px; right: 0;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .close-video-btn:hover { background: #fff; color: #000; }
 
         /* TIMELINE SEITE DESIGN (RECHTE SEITE) */
         .page-timeline {
@@ -647,10 +1088,7 @@
             margin-bottom: 40px;
             backdrop-filter: blur(5px);
         }
-        .timeline-back-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-5px);
-        }
+        .timeline-back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(-5px); }
 
         .timeline-header h1 {
             font-family: 'Brush Script MT', cursive, sans-serif;
@@ -668,13 +1106,12 @@
             margin-bottom: 60px;
         }
 
-        /* Die goldene Linie */
         .timeline-container {
             position: relative;
             max-width: 1000px;
             width: 100%;
             margin: 0 auto;
-            padding-bottom: 50px; /* Platz für Pfeilspitze */
+            padding-bottom: 50px;
         }
         .timeline-container::after {
             content: '';
@@ -687,7 +1124,6 @@
             box-shadow: 0 0 10px rgba(212,175,55,0.5);
         }
 
-        /* PFEILSPITZE AM ENDE DES ZEITSTRAHLS */
         .timeline-arrow-down {
             position: absolute;
             bottom: -15px;
@@ -702,7 +1138,6 @@
             filter: drop-shadow(0px 4px 5px rgba(212,175,55,0.4));
         }
 
-        /* FAZIT TEXTBOX UNTER DEM ZEITSTRAHL */
         .timeline-footer-box {
             max-width: 650px;
             width: 90%;
@@ -723,7 +1158,6 @@
             margin: 0;
         }
 
-        /* ZUSÄTZLICHER ZURÜCK-BUTTON GANZ UNTEN */
         .timeline-bottom-nav {
             text-align: center;
             margin-bottom: 40px;
@@ -745,12 +1179,10 @@
             gap: 8px;
         }
         .timeline-bottom-btn:hover {
-            transform: translateY(-3px) scale(1.03);
             box-shadow: 0 12px 25px rgba(212,175,55,0.3);
             background: linear-gradient(135deg, #8a293e 0%, #6b1d2f 100%);
         }
 
-        /* Timeline Items */
         .timeline-item {
             padding: 10px 40px;
             position: relative;
@@ -761,15 +1193,10 @@
             transform: translateY(40px);
             transition: all 0.8s ease-out;
         }
-        .timeline-item.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        .timeline-item.show { opacity: 1; transform: translateY(0); }
         .timeline-item.left { left: 0; text-align: right; }
         .timeline-item.right { left: 50%; text-align: left; }
 
-        /* Die Punkte auf der Linie */
         .timeline-item::after {
             content: '❤️';
             position: absolute;
@@ -784,7 +1211,6 @@
         }
         .timeline-item.right::after { left: -13px; }
 
-        /* DIE INHALTS-KARTEN MIT ELEGANTEM HOVER-EFFEKT */
         .timeline-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 25px;
@@ -803,26 +1229,10 @@
             background: #ffffff;
         }
 
-        .timeline-card h2 {
-            margin-top: 0;
-            color: #6b1d2f;
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            transition: font-size 0.3s ease;
-        }
-        .timeline-card:hover h2 {
-            font-size: 1.48rem;
-        }
-
-        .timeline-card .date {
-            color: #b89324;
-            font-weight: bold;
-            font-size: 0.95rem;
-            display: block;
-            margin-bottom: 12px;
-        }
+        .timeline-card h2 { margin-top: 0; color: #6b1d2f; font-size: 1.4rem; margin-bottom: 8px; transition: font-size 0.3s ease; }
+        .timeline-card:hover h2 { font-size: 1.48rem; }
+        .timeline-card .date { color: #b89324; font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 12px; }
         
-        /* HIGHLIGHT FÜR DAS SONDERDATUM (SEVGILILER GÜNÜ) */
         .timeline-card .special-date {
             color: #eaac12;
             font-weight: bold;
@@ -834,12 +1244,7 @@
             text-shadow: 0 0 4px rgba(234, 172, 18, 0.2);
         }
         
-        /* ANIMIERTES PULSIERENDES HERZ */
-        .beating-heart {
-            font-size: 1.2rem;
-            display: inline-block;
-            animation: heartBeatAnimation 1.2s infinite;
-        }
+        .beating-heart { font-size: 1.2rem; display: inline-block; animation: heartBeatAnimation 1.2s infinite; }
         @keyframes heartBeatAnimation {
             0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(212,175,55,0.4)); }
             25% { transform: scale(1.2); filter: drop-shadow(0 0 8px #eaeaea); }
@@ -848,18 +1253,9 @@
             100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(212,175,55,0.4)); }
         }
 
-        .timeline-card p {
-            margin: 0;
-            color: #444;
-            line-height: 1.5;
-            font-size: 1rem;
-            transition: font-size 0.3s ease;
-        }
-        .timeline-card:hover p {
-            font-size: 1.04rem;
-        }
+        .timeline-card p { margin: 0; color: #444; line-height: 1.5; font-size: 1rem; transition: font-size 0.3s ease; }
+        .timeline-card:hover p { font-size: 1.04rem; }
 
-        /* STYLING FÜR DIE BILDER & VIDEOS INNERHALB DER TIMELINE */
         .timeline-img, .timeline-video-file {
             width: 100%;
             height: auto;
@@ -872,7 +1268,21 @@
             box-sizing: border-box;
         }
 
-        /* Responsive Anpassung für kleinere Bildschirme */
+        /* Responsive Anpassungen */
+        @media screen and (max-width: 992px) {
+            .video-trigger-sidebar { position: static; transform: none !important; margin-top: 30px; opacity: 1; pointer-events: auto; }
+        }
+
+        @media screen and (max-width: 900px) {
+            .book { width: 90%; max-width: 340px; height: 460px; transform: none !important; }
+            .book.opened { transform: none !important; }
+            .book .page-click-zone-left { left: 0; }
+            .book h3 { font-size: 2.2rem; }
+            .book p { font-size: 1.1rem; }
+        }
+
+        @media screen and (max-width: 820px) { .box-deko-container { display: none; } }
+
         @media screen and (max-width: 768px) {
             .timeline-container::after { left: 31px; }
             .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; }
@@ -883,10 +1293,7 @@
             .timeline-arrow-down { left: 31px; transform: translateX(-50%); }
         }
 
-        /* ANPASSUNG FÜR POLAROID NR. 6 (Fokus nach links verschieben) */
-        .polaroid-focus-left img {
-            object-position: 20% center;
-        }
+        .polaroid-focus-left img { object-position: 20% center; }
     </style>
 </head>
 <body>
@@ -922,25 +1329,21 @@
                 <div class="kasten-overlay" id="textKastenOverlay">
                     <table class="intro-table">
                         <tr>
-                            <td class="intro-cell-side">
-                                <img src="links.jpg" class="side-pic" alt="Links">
-                            </td>
+                            <td class="intro-cell-side"><img src="links.jpg" class="side-pic" alt="Links"></td>
                             <td class="intro-cell-main">
                                 <div class="text-kasten">
                                     <h1>Happy Birthday, iki gözümün nuru ❤️</h1>
                                     <p>
-                                        Hayatına dokunabildiğim und ilk doğum gününü yanında kutlayabildiğim için kendimi çok şanslı hissediyorum. 
-                                        Seninle geçen her an benim için tarifsiz derecede özel und değerli. Gülüşün, sesin, bakışın… 
+                                        Hayatına dokunabildiğim ve ilk doğum gününü yanında kutlayabildiğim için kendimi çok şanslı hissediyorum. 
+                                        Seninle geçen her an benim için tarifsiz derecede özel ve değerli. Gülüşün, sesin, bakışın… 
                                         Hepsi kalbimde ayrı bir yer bıraktı.<br><br>
                                         Bugün sadece senin doğduğun gün değil, aynı zamanda benim hayatımın da güzelleştiği günlerden biri. 
-                                        Bu küçük zaman kapsülü de birlikte yaşadığımız en güzel anıları, hisleri und sana olan sevgimi içinde saklıyor…
+                                        Bu küçük zaman kapsülü de birlikte yaşadığımız en güzel anıları, hisleri dairy ve sana olan sevgimi içinde saklıyor…
                                     </p>
                                     <button class="weiter-btn" onclick="zeigeErinnerungen()">Anıları Gör ✨</button>
                                 </div>
                             </td>
-                            <td class="intro-cell-side">
-                                <img src="rechts.jpg" class="side-pic" alt="Rechts">
-                            </td>
+                            <td class="intro-cell-side"><img src="rechts.jpg" class="side-pic" alt="Rechts"></td>
                         </tr>
                     </table>
                 </div>
@@ -951,29 +1354,39 @@
                 </div>
             </div>
 
-            <div class="main-content" id="birthdayContent">
+            <div class="birthday-content class" id="birthdayContent" style="display: none;">
                 <h1 class="birthday-title">Anılarımız</h1>
                 <p class="subtitle">Her anı bir hazine... 🎂✨</p>
 
                 <h2 class="gallery-title">Momente, die ich für immer im Herzen trage 📸</h2>
-                <div class="grid-gallery">
-                    <div class="polaroid"><img src="foto1.jpg"><div class="caption">Sen & Ben ✨</div></div>
-                    <div class="polaroid"><img src="foto2.jpg"><div class="caption">Aşk mideye gider 🍕❤️</div></div>
-                    <div class="polaroid"><img src="foto3.jpg"><div class="caption">Sadece seninle olan anlar 🌿</div></div>
-                    <div class="polaroid"><img src="foto4.jpg"><div class="caption">Kalbimdeki güneş ışığı ☀️</div></div>
-                    <div class="polaroid"><img src="foto5.jpg"><div class="caption">Büyülü geceler 🎆</div></div>
-                    <div class="polaroid polaroid-focus-left"><img src="foto6.jpg"><div class="caption">Seninle her yolculuk daha güzel 🚌💋</div></div>
+                
+                <div class="gallery-container-flex">
+                    <div class="gallery-pinguin-wrapper"><img src="pinguine.png" alt="Süße Pinguine"></div>
+                    <div class="grid-gallery">
+                        <div class="polaroid"><img src="foto1.jpg"><div class="caption">Sen & Ben ✨</div></div>
+                        <div class="polaroid"><img src="foto2.jpg"><div class="caption">Aşk mideye gider 🍕❤️</div></div>
+                        <div class="polaroid"><img src="foto3.jpg"><div class="caption">Sadece seninle olan anlar 🌿</div></div>
+                        <div class="polaroid"><img src="foto4.jpg"><div class="caption">Kalbimdeki güneş ışığı ☀️</div></div>
+                        <div class="polaroid"><img src="foto5.jpg"><div class="caption">Büyülü geceler 🎆</div></div>
+                        <div class="polaroid polaroid-focus-left"><img src="foto6.jpg"><div class="caption">Seninle her yolculuk daha güzel 🚌💋</div></div>
+                    </div>
                 </div>
 
                 <h2 class="gallery-title" style="margin-top: 100px;">Seni Sevmemin Küçük Birkaç Nedeni... 📦❤️</h2>
                 <div class="reasons-section">
+                    <div class="zeppelin-container">
+                        <div class="zeppelin-body"><div class="zeppelin-flosse"></div><div class="zeppelin-gondel"></div></div>
+                        <div class="banner-ropes"></div>
+                        <div class="zeppelin-banner"><span>23 yaşında 🎉</span></div>
+                    </div>
+
+                    <div class="box-deko-container box-deko-left"><span class="deko-herz">💖</span><span>Her anımız<br>bir hazine...</span></div>
+                    <div class="box-deko-container box-deko-right"><span class="deko-herz">💝</span><span>Sonsuza<br>doğru...</span></div>
                     
                     <div class="box-perspective-wrapper" onclick="neuerGrund()">
                         <div class="contrast-box-3d" id="contrastBox">
                             <div class="c-box-inside"></div>
-                            
                             <div class="c-box-side-right"></div>
-                            
                             <div class="c-box-front">
                                 <div class="c-ribbon-vertical"></div>
                                 <div class="c-box-text-content">
@@ -981,31 +1394,21 @@
                                     <div class="c-heart-icon">❤️</div>
                                 </div>
                             </div>
-                            
                             <div class="c-box-lid">
                                 <div class="c-lid-top">
-                                    <div class="c-ribbon-lid-v"></div>
-                                    <div class="c-ribbon-lid-h"></div>
-                                    <div class="c-bow">
-                                        <div class="c-loop-l"></div>
-                                        <div class="c-loop-r"></div>
-                                        <div class="c-knot"></div>
-                                    </div>
+                                    <div class="c-ribbon-lid-v"></div><div class="c-ribbon-lid-h"></div>
+                                    <div class="c-bow"><div class="c-loop-l"></div><div class="c-loop-r"></div><div class="c-knot"></div></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="flying-heart-message" id="flyingLetter">
-                        <span id="reasonText">Buraya harika bir neden gelecek...</span>
-                    </div>
-                    
+                    <div class="flying-heart-message" id="flyingLetter"><span id="reasonText">Buraya harika bir neden gelecek...</span></div>
                     <button class="reasons-btn" onclick="neuerGrund()">Bir Neden Göster ✨</button>
                 </div>
 
                 <div class="music-section">
                     <h3>Bizim Şarkımız 🎵</h3>
-                    
                     <div class="turntable-body" id="turntable" onclick="toggleMusic()">
                         <div class="vinyl-record">
                             <div class="vinyl-label-video">
@@ -1013,15 +1416,72 @@
                                 <div class="vinyl-center-hole"></div>
                             </div>
                         </div>
-                        <div class="turntable-arm"></div>
-                        <div class="turntable-switch"></div>
+                        <div class="turntable-arm"></div><div class="turntable-switch"></div>
                     </div>
                 </div>
 
                 <div class="portal-section">
                     <h2>Eski Günlere Küçük Bir Yolculuk... ⏳</h2>
                     <p>Zaman ne kadar hızlı geçse de, seninle attığımız her adım dün gibi aklımda.</p>
+                    
                     <button class="portal-btn" onclick="switchToTimeline()">Zaman Tüneline Gir ✨</button>
+
+                    <div class="book-section-wrapper" style="position: relative;">
+                        <h3 class="book-container-title">Sevdiklerinden Sana Bir Mesaj Var... 📖✨</h3>
+                        
+                        <div class="book" id="friendshipBook">
+                            <div class="page-click-zone-left" onclick="bookNavigate('left')"></div>
+                            <div class="page-click-zone-right" onclick="bookNavigate('right')"></div>
+
+                            <div class="pages">
+                                
+                                <div class="page-wrapper w1" id="b1">
+                                    <div class="page-front">
+                                        <h2>Bizim Kitabımız</h2>
+                                        <div class="cover-heart">❤️</div>
+                                        <span class="flip-hint">Açmak için tıkla →</span>
+                                    </div>
+                                    <div class="page-back">
+                                        <h3>Aile 🤍</h3>
+                                        <p>"Canım kızımız, yeni yaşın sana sağlık ve mutluluk getirsin. Seninle her zaman gurur duyuyoruz. İyi ki doğdun, iyi ki varsın!"</p>
+                                        <span class="flip-hint">Sonraki Sayfa →</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="page-wrapper w2" id="b2">
+                                    <div class="page-front">
+                                        <h3>Arkadaşlar 👭</h3>
+                                        <p>"Doğum günün kutlu olsun canımız! Seninle güldüğümüz, eğlendiğimiz her an çok özel. Yeni yaşında tüm dileklerin gerçek olsun, seni çok seviyoruz!"</p>
+                                        <span class="flip-hint">Çevir →</span>
+                                    </div>
+                                    <div class="page-back">
+                                        <h3>Ortak Hatıralar 🌟</h3>
+                                        <p>"Geçmişten bugüne biriktirdiğimiz tüm güzel anlar, gelecekteki kahkahalarımızın temeli olsun. İyi ki hayatımızdasın!"</p>
+                                        <span class="flip-hint">Sonraki Sayfa →</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="page-wrapper w3" id="b3">
+                                    <div class="page-front">
+                                        <h3>Küçük Bir Not 📝</h3>
+                                        <p>"Sen her şeyin en güzelini hak ediyorsun. Şimdi son bir kez daha çevir..."</p>
+                                        <span class="flip-hint">Son kez çevir →</span>
+                                    </div>
+                                    <div class="page-back">
+                                        <h3>Son Sayfa ✨</h3>
+                                        <p>"Sevginin etrafını sardığı, asla yalnız kalmayacağın bir ömre... <br><br>Büyük sürprizi sağ taraftaki butona basarak görebilirsin! 👉"</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="video-trigger-sidebar" id="sidebarVideoTrigger">
+                            <div class="pulsing-video-btn" onclick="openSurpriseVideo()">🎬</div>
+                            <span class="video-btn-label">Sürprizi Gör ✨</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -1031,11 +1491,10 @@
             
             <div class="timeline-header">
                 <h1>Zaman Tünelimiz</h1>
-                <p>Bizim hikayemiz, en güzel kilometre taşlarımız... ✨💛</p>
+                <p>Bizim hikayemiz, en güzel kilometre taşlarımız... ✨🎄</p>
             </div>
 
             <div class="timeline-container" id="timelineContainer">
-                
                 <div class="timeline-item left">
                     <div class="timeline-card">
                         <h2>İlk Görüş 👀</h2>
@@ -1073,7 +1532,7 @@
                     <div class="timeline-card">
                         <h2>Gerçek İlk Adım & Uyuyakalmak 📞💤</h2>
                         <span class="date">17. & 18.10.2025</span>
-                        <p>İlk defa tamamen net niyetlerle, içimden geldiği gibi seninle chatleşmeye başladım. Hızımızı alamayıp gece yarılarına kadar telefonda konuştuk. Sonra benim şarjım bitti, telephone kapandı. Sen de o sırada telefonda uyuya kalmıştın... Yanlışlıkla kapattım sanıp nasıl korktum, bir de gittim Nima'ya yazdım sen ulaşılamaz olunca!</p>
+                        <p>İlk defa tamamen net niyetlerle, içimden geldiği gibi seninle chatleşmeye başladım. Hızımızı alamayıp gece yarılarına kadar telefonda konuştuk. Sonra benim şarjım bitti, telefon kapandı. Sen de o sırada telefonda uyuya kalmıştın... Yanlışlıkla kapattım sanıp nasıl korktum, bir de gittim Nima'ya yazdım sen ulaşılamaz olunca!</p>
                     </div>
                 </div>
 
@@ -1081,7 +1540,7 @@
                     <div class="timeline-card">
                         <h2>İlk Buluşma / Das 1. Treffen ☕❤️</h2>
                         <span class="date">15.11.2025</span>
-                        <p>Sonunda bir şekilde zaman yaratıp seninle baş başa dışarı çıkabilmiştim. Her şey o kadar büyüleyici und güzeldi ki, buluşma bittiğinde "Acaba her şeyi berbat ettim mi?" diye içten içe korkudan öldüm. Çünkü o an bile sana çoktan fena bağlanmıştım.</p>
+                        <p>Sonunda bir şekilde zaman yaratıp seninle baş başa dışarı çıkabilmiştim. Her şey o kadar büyüleyici ve güzeldi ki, buluşma bittiğinde "Acaba her şeyi berbat ettim mi?" diye içten içe korkudan öldüm. Çünkü o an bile sana çoktan fena bağlanmıştım.</p>
                     </div>
                 </div>
 
@@ -1097,7 +1556,7 @@
                     <div class="timeline-card">
                         <h2>O Büyük Gün: Sevgililik Teklifi 🌹💍</h2>
                         <span class="special-date">14.02.2026 (Sevgililer Günü) <span class="beating-heart">❤️</span></span>
-                        <p>Bütün o ağır sınav streslerini, vizeleri geride bıraktıktan sonra Sevgililer Günü'nde ilk kez baş başa çıktık. Ve o gün sana "Benimle olur musun?" diye sordum. Kabul ediyorum, birazcık heyecanlanmış olabilirim... Und evet, yalan yok; bana her sarıldığında kalbim hala tam olarak o günkü gibi deli gibi çarpıyor.</p>
+                        <p>Bütün o ağır sınav streslerini, vizeleri geride bıraktıktan sonra Sevgililer Günü'nde ilk kez baş başa çıktık. Ve o gün bana "Benimle olur musun?" diye sordum. Kabul ediyorum, birazcık heyecanlanmış olabilirim... Ve evet, yalan yok; bana her sarıldığında kalbim hala tam olarak o günkü gibi deli gibi çarpıyor.</p>
                     </div>
                 </div>
 
@@ -1105,7 +1564,7 @@
                     <div class="timeline-card">
                         <h2>İlk Öpücük 😘📜</h2>
                         <span class="date">26.02.2026</span>
-                        <p>Bizim törelerimize göre sen artık benimsin! 😉 Evvet, o unforgettable ilk öpücük... İşte o günden beri, durmaksızın, her gün daha da büyüyerek hikayemizi yazmaya devam ediyoruz.</p>
+                        <p>Bizim törelerimize göre sen artık benimsin! 😉 Evvet, o unutulmaz ilk öpücük... İşte o günden beri, durmaksızın, her gün daha da büyüyerek hikayemizi yazmaya devam ediyoruz.</p>
                     </div>
                 </div>
 
@@ -1142,7 +1601,6 @@
                 </div>
 
                 <div class="timeline-arrow-down"></div>
-
             </div>
 
             <div class="timeline-footer-box">
@@ -1153,7 +1611,13 @@
                 <button class="timeline-bottom-btn" onclick="switchToMain()">← Ana Sayfaya Dön</button>
             </div>
         </div>
+    </div>
 
+    <div class="video-overlay-modal" id="surpriseVideoModal">
+        <div class="video-wrapper-inner">
+            <button class="close-video-btn" onclick="closeSurpriseVideo()">X Kapat</button>
+            <video id="surpriseVideo" src="zusammenschnitt.mp4" controls playsinline></video>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -1164,8 +1628,8 @@
             "Çünkü seninle geçen her saniye, hayatımın en değerli anı haline geliyor.",
             "Çünkü kalbin o kadar güzel ve saf ki, dünyamı güzelleştiriyorsun.",
             "Çünkü sesini duyduğum an tüm huzursuzluklarım uçup gidiyor.",
-            "Çünkü bana daha önce hiç hissetmediğim kadar özel und değerli hissettiriyorsun.",
-            "Çünkü gözlerinin içine baktığımda geleceğimi und evimi görüyorum.",
+            "Çünkü bana daha önce hiç hissetmediğim kadar özel ve değerli hissettiriyorsun.",
+            "Çünkü gözlerinin içine baktığımda geleceğimi ve evimi görüyorum.",
             "Çünkü her halinle, sadece kendin olduğun için seni çok seviyorum.",
             "Çünkü seninle saçmalamak bile dünyanın en eğlenceli aktivitesi.",
             "Çünkü her düştüğümde elimi tutup beni ayağa kaldıracak gücü veriyorsun.",
@@ -1183,9 +1647,7 @@
                 widget.classList.add('music-playing');
                 turntable.classList.add('music-playing');
                 widgetText.innerText = "Musik läuft";
-            }).catch(err => {
-                console.log("Autoplay blockiert, wartet auf Interaktion.");
-            });
+            }).catch(err => { console.log("Autoplay blockiert."); });
         }
 
         function toggleMusic() {
@@ -1202,23 +1664,20 @@
             }
         }
 
-        function openEnvelope() {
-            document.getElementById('briefUmschlag').classList.add('open');
-        }
+        function openEnvelope() { document.getElementById('briefUmschlag').classList.add('open'); }
 
         function zeigeTextKasten(event) {
             event.stopPropagation(); 
             playMusic();
 
-            /* AUSLÖSEN DES INTERAKTIVEN KONFETTI-REGENS */
             try {
-                var end = Date.now() + (1 * 1000); // 2 Sekunden lang Konfetti schießen
+                var end = Date.now() + (1 * 1000); 
                 (function frame() {
                     confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0, y: 0.8 } });
                     confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1, y: 0.8 } });
                     if (Date.now() < end) { requestAnimationFrame(frame); }
                 }());
-            } catch(e) { console.log("Konfetti konnte nicht geladen werden."); }
+            } catch(e) {}
 
             const envelope = document.getElementById('briefUmschlag');
             const kastenOverlay = document.getElementById('textKastenOverlay');
@@ -1238,10 +1697,8 @@
         function zeigeErinnerungen() {
             const content = document.getElementById('birthdayContent');
             const intro = document.getElementById('introPage');
-            
             intro.style.height = 'auto';
             content.style.display = 'block';
-            
             setTimeout(() => {
                 content.classList.add('visible');
                 content.scrollIntoView({ behavior: 'smooth' });
@@ -1255,18 +1712,14 @@
             
             box.classList.remove('shake-contrast');
             letter.classList.remove('fly-up-contrast');
-            
             void box.offsetWidth; 
-            
             box.classList.add('shake-contrast');
             
             const zufallsIndex = Math.floor(Math.random() * gruende.length);
             textElement.innerText = gruende[zufallsIndex];
-            
             letter.classList.add('fly-up-contrast');
         }
 
-        /* NAVIGATION ZWISCHEN HAUPTSEITE UND TIMELINE */
         function switchToTimeline() {
             pageContainer.style.transform = 'translateX(-100vw)';
             window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1281,18 +1734,97 @@
             }, 100);
         }
 
-        /* EFFEKT: TIMELINE ITEMS PLOPPEN BEIM SCROLLEN AUF */
+        let activePage = 0; 
+
+        function bookNavigate(direction) {
+            const book = document.getElementById('friendshipBook');
+            const b1 = document.getElementById('b1');
+            const b2 = document.getElementById('b2');
+            const b3 = document.getElementById('b3');
+            const sidebar = document.getElementById('sidebarVideoTrigger');
+
+            if (direction === 'right') {
+                if (activePage === 0) {
+                    book.classList.add('opened'); 
+                    b1.classList.add('flipped');  
+                    activePage = 1;
+                } else if (activePage === 1) {
+                    b2.classList.add('flipped');  
+                    activePage = 2;
+                } else if (activePage === 2) {
+                    b3.classList.add('flipped');  
+                    activePage = 3;
+                    sidebar.classList.add('visible');
+                }
+            } else if (direction === 'left') {
+                if (activePage === 1) {
+                    b1.classList.remove('flipped');
+                    book.classList.remove('opened'); 
+                    activePage = 0;
+                } else if (activePage === 2) {
+                    b2.classList.remove('flipped');
+                    activePage = 1;
+                } else if (activePage === 3) {
+                    b3.classList.remove('flipped');
+                    sidebar.classList.remove('visible'); 
+                    activePage = 2;
+                }
+            }
+        }
+
+        function openSurpriseVideo() {
+            const modal = document.getElementById('surpriseVideoModal');
+            const video = document.getElementById('surpriseVideo');
+            
+            if (music && !music.paused) {
+                music.pause();
+                widgetText.innerText = "Musik pausiert";
+                widget.classList.remove('music-playing');
+                turntable.classList.remove('music-playing');
+            }
+            
+            try {
+                confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            } catch(e) {}
+
+            modal.classList.add('open');
+            video.play();
+        }
+
+        function closeSurpriseVideo() {
+            const modal = document.getElementById('surpriseVideoModal');
+            const video = document.getElementById('surpriseVideo');
+            video.pause();
+            modal.classList.remove('open');
+            resetBook();
+        }
+
+        function resetBook() {
+            const book = document.getElementById('friendshipBook');
+            const sidebar = document.getElementById('sidebarVideoTrigger');
+            
+            sidebar.classList.remove('visible');
+            
+            document.getElementById('b3').classList.remove('flipped');
+            setTimeout(() => {
+                document.getElementById('b2').classList.remove('flipped');
+            }, 150);
+            setTimeout(() => {
+                document.getElementById('b1').classList.remove('flipped');
+                book.classList.remove('opened');
+            }, 300);
+            
+            activePage = 0;
+        }
+
         const timelineItems = document.querySelectorAll('.timeline-item');
 
         function checkTimelineScroll() {
             if (pageContainer.style.transform === 'translateX(-100vw)') {
                 const triggerBottom = window.innerHeight * 0.85;
-                
                 timelineItems.forEach(item => {
                     const itemTop = item.getBoundingClientRect().top;
-                    if (itemTop < triggerBottom) {
-                        item.classList.add('show');
-                    }
+                    if (itemTop < triggerBottom) { item.classList.add('show'); }
                 });
             }
         }
