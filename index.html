@@ -615,9 +615,20 @@
         }
         .reasons-btn:hover { transform: scale(1.05); background-color: #fff; }
 
-        /* PLATTENSPIELER MIT ROTIERENDER VIDEO-SCHEIBE */
+        /* INTERAKTIVE INTERACTIVE MEDIA ZONE (PLATTENSPIELER & GÄNSEBLÜMCHEN) */
+        .interactive-media-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
         .music-section { 
-            margin-top: 100px; 
             background: rgba(255, 255, 255, 0.08); 
             padding: 50px 40px; 
             border-radius: 24px; 
@@ -626,8 +637,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-            max-width: 650px;
+            flex: 1;
+            max-width: 500px;
             box-sizing: border-box;
         }
         .music-section h3 { color: #fecfef; font-size: 1.8rem; margin: 0 0 35px 0; font-family: 'Brush Script MT', cursive, sans-serif; }
@@ -697,8 +708,8 @@
             width: 10px;
             height: 10px;
             background: #222;
-            border-radius: 50%;
             border: 2px solid #d4af37;
+            border-radius: 50%;
             z-index: 5;
         }
 
@@ -762,6 +773,111 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* DESIGN FÜR DIE GÄNSEBLÜMCHEN-BOX */
+        .daisy-section {
+            background: rgba(255, 255, 255, 0.08); 
+            padding: 50px 40px; 
+            border-radius: 24px; 
+            border: 1px solid rgba(255,255,255,0.15);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            max-width: 500px;
+            min-height: 388px;
+            box-sizing: border-box;
+            color: white;
+        }
+
+        .daisy-main-title {
+            color: #fecfef; 
+            font-size: 1.8rem; 
+            margin: 0 0 15px 0; 
+            font-family: 'Brush Script MT', cursive, sans-serif;
+        }
+
+        .daisy-game-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .daisy-status-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 35px;
+            height: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .daisy-flower {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 20px;
+        }
+
+        .daisy-center {
+            position: absolute;
+            top: 65px; left: 65px;
+            width: 50px; height: 50px;
+            background: radial-gradient(circle, #ffeb3b 0%, #fbc02d 100%);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .daisy-petal {
+            position: absolute;
+            top: 0; left: 77px; 
+            width: 26px; height: 75px;
+            background: linear-gradient(to bottom, #ffffff 80%, #f5f5f5 100%);
+            border-radius: 20px 20px 0 0;
+            transform-origin: bottom center;
+            cursor: pointer;
+            z-index: 5;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .daisy-petal:hover {
+            filter: brightness(0.95);
+            margin-top: -2px;
+        }
+
+        .petal-plucked {
+            animation: fallAndFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fallAndFade {
+            0% { transform: rotate(var(--rot)) translateY(0) rotate(0deg); opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { transform: rotate(var(--rot)) translateY(120px) rotate(45deg); opacity: 0; }
+        }
+
+        .daisy-final-message {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 2.2rem;
+            color: #fecfef;
+            margin-top: 15px;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: none;
+            text-shadow: 0 0 10px rgba(254, 207, 239, 0.5);
+        }
+        .daisy-final-message.visible {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
         /* PORTAL-ZONE FÜR DEN ZEITSTRAHL */
         .portal-section {
             margin-top: 120px;
@@ -805,7 +921,7 @@
             box-shadow: 0 15px 30px rgba(212,175,55,0.4);
         }
 
-        /* ─── HOCHWERTIGES 3D BUCH DESIGN MIT ZENTRALER KICK-NAVIGATION ─── */
+        /* ─── HOCHWERTIGES 3D BUCH DESIGN ─── */
         .book-section-wrapper {
             width: 100%;
             margin-top: 80px;
@@ -828,7 +944,6 @@
             text-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
 
-        /* Das zentrierte Buch-Skelett */
         .book {
             position: relative;
             width: 420px;  
@@ -840,16 +955,9 @@
             transform: translateX(0px); 
         }
 
-        /* Sobald aufgeschlagen verschiebt sich die Buchachse nach rechts */
-        .book.opened {
-            transform: translateX(210px);
-        }
+        .book.opened { transform: translateX(210px); }
 
-        .book .pages {
-            width: 100%; height: 100%;
-            position: absolute;
-            z-index: 10;
-        }
+        .book .pages { width: 100%; height: 100%; position: absolute; z-index: 10; }
 
         .book .page-wrapper {
             position: absolute;
@@ -892,15 +1000,11 @@
             border-radius: 14px 0 0 14px;
         }
 
-        /* KLASSISCHE RECHTS/LINKS NAVIGATION OVERLAYS */
         .book .page-click-zone-left,
         .book .page-click-zone-right {
             position: absolute;
-            top: 0;
-            height: 100%;
-            width: 50%;
-            cursor: pointer;
-            z-index: 30; 
+            top: 0; height: 100%; width: 50%;
+            cursor: pointer; z-index: 30; 
         }
         .book .page-click-zone-left { left: -100%; }
         .book .page-click-zone-right { right: 0; }
@@ -920,45 +1024,28 @@
         }
 
         .book p {
-            font-size: 1.3rem; 
-            line-height: 1.7;
-            font-style: italic;
-            text-align: center;
-            margin: 0;
-            color: #4a4230;
-            width: 100%;
+            font-size: 1.3rem; line-height: 1.7; font-style: italic;
+            text-align: center; margin: 0; color: #4a4230; width: 100%;
         }
 
         .book .flip-hint {
-            position: absolute;
-            bottom: 25px; right: 30px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #b89324;
+            position: absolute; bottom: 25px; right: 30px;
+            font-size: 0.9rem; font-weight: bold; color: #b89324;
         }
-        
-        .book .page-back .flip-hint {
-            right: auto; left: 30px;
-        }
+        .book .page-back .flip-hint { right: auto; left: 30px; }
 
         .book .page-wrapper.w1 .page-front {
             background: linear-gradient(135deg, #8a1f34 0%, #50121e 100%);
-            border: 3px solid #d4af37;
-            border-left: 12px solid #330a12;
-            color: #d4af37;
-            justify-content: center;
+            border: 3px solid #d4af37; border-left: 12px solid #330a12;
+            color: #d4af37; justify-content: center;
         }
         .book .page-wrapper.w1 .page-front h2 {
             font-family: 'Brush Script MT', cursive, sans-serif;
-            font-size: 3.8rem;
-            margin: 0 0 15px 0;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-            text-align: center;
+            font-size: 3.8rem; margin: 0 0 15px 0;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6); text-align: center;
         }
         .book .page-wrapper.w1 .page-front .cover-heart {
-            font-size: 4.5rem;
-            filter: drop-shadow(0 0 15px rgba(212,175,55,0.6));
-            margin-top: 20px;
+            font-size: 4.5rem; filter: drop-shadow(0 0 15px rgba(212,175,55,0.6)); margin-top: 20px;
         }
 
         .page-wrapper.w1 { z-index: 6; }
@@ -969,53 +1056,27 @@
         .page-wrapper.flipped.w2 { transform: rotateY(-180deg); z-index: 2; }
         .page-wrapper.flipped.w3 { transform: rotateY(-180deg); z-index: 3; }
 
-        /* SÜRPRIZ VIDEO BUTTON NEBEN DEM BUCH */
+        /* SÜRPRIZ VIDEO BUTTON */
         .video-trigger-sidebar {
-            position: absolute;
-            top: 50%;
-            right: -190px;
-            transform: translateY(-50%) scale(0.8);
-            opacity: 0;
-            pointer-events: none;
+            position: absolute; top: 50%; right: -190px;
+            transform: translateY(-50%) scale(0.8); opacity: 0; pointer-events: none;
             transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 100;
+            display: flex; flex-direction: column; align-items: center; z-index: 100;
         }
-        .video-trigger-sidebar.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(-50%) scale(1);
-        }
+        .video-trigger-sidebar.visible { opacity: 1; pointer-events: auto; transform: translateY(-50%) scale(1); }
 
         .pulsing-video-btn {
-            width: 110px;
-            height: 110px;
+            width: 110px; height: 110px;
             background: radial-gradient(circle, #d4af37 0%, #b89324 100%);
-            border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.2rem;
-            position: relative;
-            animation: buttonPulsieren 2s infinite;
-            transition: transform 0.2s;
+            border-radius: 50%; border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); cursor: pointer;
+            display: flex; justify-content: center; align-items: center; font-size: 2.2rem;
+            position: relative; animation: buttonPulsieren 2s infinite; transition: transform 0.2s;
         }
-        .pulsing-video-btn:hover {
-            transform: scale(1.1);
-        }
+        .pulsing-video-btn:hover { transform: scale(1.1); }
         .video-btn-label {
-            color: #d4af37;
-            font-weight: bold;
-            font-size: 1rem;
-            margin-top: 12px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            font-family: 'Segoe UI', sans-serif;
-            letter-spacing: 0.5px;
+            color: #d4af37; font-weight: bold; font-size: 1rem; margin-top: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-family: 'Segoe UI', sans-serif; letter-spacing: 0.5px;
         }
 
         @keyframes buttonPulsieren {
@@ -1026,222 +1087,89 @@
 
         /* VOLLBILD VIDEO OVERLAY (KINOMODUS) */
         .video-overlay-modal {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95); z-index: 2000;
+            display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.5s ease;
         }
-
         .video-overlay-modal.open { display: flex; opacity: 1; }
 
         .video-wrapper-inner {
-            position: relative;
-            width: 80%;
-            max-width: 900px;
-            aspect-ratio: 16/9;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
-            border: 3px solid #d4af37;
-            border-radius: 8px;
-            background: #000;
+            position: relative; width: 80%; max-width: 900px; aspect-ratio: 16/9;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8); border: 3px solid #d4af37;
+            border-radius: 8px; background: #000;
         }
-
         .video-wrapper-inner video { width: 100%; height: 100%; object-fit: contain; }
-
         .close-video-btn {
-            position: absolute;
-            top: -50px; right: 0;
-            background: transparent;
-            color: #fff;
-            border: 2px solid #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
+            position: absolute; top: -50px; right: 0; background: transparent;
+            color: #fff; border: 2px solid #fff; font-size: 1.2rem; font-weight: bold;
+            padding: 5px 15px; border-radius: 20px; cursor: pointer; transition: all 0.2s;
         }
         .close-video-btn:hover { background: #fff; color: #000; }
 
         /* TIMELINE SEITE DESIGN (RECHTE SEITE) */
-        .page-timeline {
-            background-color: #4a0e17;
-            min-height: 100vh;
-            padding: 40px 20px 100px 20px;
-            position: relative;
-        }
+        .page-timeline { background-color: #4a0e17; min-height: 100vh; padding: 40px 20px 100px 20px; position: relative; }
         
         .timeline-back-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            margin-bottom: 40px;
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 25px; border-radius: 25px; cursor: pointer; font-weight: bold;
+            transition: all 0.2s ease; margin-bottom: 40px; backdrop-filter: blur(5px);
         }
         .timeline-back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(-5px); }
 
-        .timeline-header h1 {
-            font-family: 'Brush Script MT', cursive, sans-serif;
-            font-size: 3.5rem;
-            color: #d4af37;
-            margin: 0;
-            text-align: center;
-        }
-        .timeline-header p {
-            color: #fecfef;
-            font-size: 1.1rem;
-            opacity: 0.9;
-            text-align: center;
-            margin-top: 10px;
-            margin-bottom: 60px;
-        }
+        .timeline-header h1 { font-family: 'Brush Script MT', cursive, sans-serif; font-size: 3.5rem; color: #d4af37; margin: 0; text-align: center; }
+        .timeline-header p { color: #fecfef; font-size: 1.1rem; opacity: 0.9; text-align: center; margin-top: 10px; margin-bottom: 60px; }
 
-        .timeline-container {
-            position: relative;
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            padding-bottom: 50px;
-        }
+        .timeline-container { position: relative; max-width: 1000px; width: 100%; margin: 0 auto; padding-bottom: 50px; }
         .timeline-container::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: #d4af37;
-            top: 0; bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            box-shadow: 0 0 10px rgba(212,175,55,0.5);
+            content: ''; position: absolute; width: 4px; background-color: #d4af37;
+            top: 0; bottom: 0; left: 50%; margin-left: -2px; box-shadow: 0 0 10px rgba(212,175,55,0.5);
         }
 
         .timeline-arrow-down {
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            border-top: 18px solid #d4af37;
-            z-index: 5;
-            filter: drop-shadow(0px 4px 5px rgba(212,175,55,0.4));
+            position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent;
+            border-top: 18px solid #d4af37; z-index: 5; filter: drop-shadow(0px 4px 5px rgba(212,175,55,0.4));
         }
 
         .timeline-footer-box {
-            max-width: 650px;
-            width: 90%;
-            background: rgba(255, 255, 255, 0.96);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.2);
-            text-align: center;
-            margin: 60px auto 40px auto;
-            box-sizing: border-box;
-            border: 2px solid #d4af37;
+            max-width: 650px; width: 90%; background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.2);
+            text-align: center; margin: 60px auto 40px auto; box-sizing: border-box; border: 2px solid #d4af37;
         }
-        .timeline-footer-box p {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: #4a0e17;
-            font-weight: 600;
-            margin: 0;
-        }
+        .timeline-footer-box p { font-size: 1.15rem; line-height: 1.7; color: #4a0e17; font-weight: 600; margin: 0; }
 
-        .timeline-bottom-nav {
-            text-align: center;
-            margin-bottom: 40px;
-            width: 100%;
-        }
+        .timeline-bottom-nav { text-align: center; margin-bottom: 40px; width: 100%; }
         .timeline-bottom-btn {
-            background: linear-gradient(135deg, #6b1d2f 0%, #4a0e17 100%);
-            color: #fff;
-            border: 2px solid #d4af37;
-            padding: 12px 35px;
-            font-size: 1.05rem;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            background: linear-gradient(135deg, #6b1d2f 0%, #4a0e17 100%); color: #fff; border: 2px solid #d4af37;
+            padding: 12px 35px; font-size: 1.05rem; font-weight: bold; border-radius: 25px; cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px;
         }
-        .timeline-bottom-btn:hover {
-            box-shadow: 0 12px 25px rgba(212,175,55,0.3);
-            background: linear-gradient(135deg, #8a293e 0%, #6b1d2f 100%);
-        }
+        .timeline-bottom-btn:hover { box-shadow: 0 12px 25px rgba(212,175,55,0.3); background: linear-gradient(135deg, #8a293e 0%, #6b1d2f 100%); }
 
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: transparent;
-            width: 50%;
-            box-sizing: border-box;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease-out;
-        }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: transparent; width: 50%; box-sizing: border-box; opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .timeline-item.show { opacity: 1; transform: translateY(0); }
         .timeline-item.left { left: 0; text-align: right; }
         .timeline-item.right { left: 50%; text-align: left; }
 
         .timeline-item::after {
-            content: '❤️';
-            position: absolute;
-            width: 30px; height: 30px;
-            right: -17px; top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            content: '❤️'; position: absolute; width: 30px; height: 30px; right: -17px; top: 15px;
+            border-radius: 50%; z-index: 1; font-size: 1.1rem; display: flex; justify-content: center; align-items: center;
         }
         .timeline-item.right::after { left: -13px; }
 
         .timeline-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            position: relative;
-            display: inline-block;
-            text-align: left;
-            max-width: 85%;
-            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); position: relative; display: inline-block;
+            text-align: left; max-width: 85%; transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
         }
-        
-        .timeline-card:hover {
-            transform: scale(1.04);
-            box-shadow: 0 15px 35px rgba(212,175,55,0.4);
-            background: #ffffff;
-        }
-
+        .timeline-card:hover { transform: scale(1.04); box-shadow: 0 15px 35px rgba(212,175,55,0.4); background: #ffffff; }
         .timeline-card h2 { margin-top: 0; color: #6b1d2f; font-size: 1.4rem; margin-bottom: 8px; transition: font-size 0.3s ease; }
         .timeline-card:hover h2 { font-size: 1.48rem; }
         .timeline-card .date { color: #b89324; font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 12px; }
         
         .timeline-card .special-date {
-            color: #eaac12;
-            font-weight: bold;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-            text-shadow: 0 0 4px rgba(234, 172, 18, 0.2);
+            color: #eaac12; font-weight: bold; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; text-shadow: 0 0 4px rgba(234, 172, 18, 0.2);
         }
         
         .beating-heart { font-size: 1.2rem; display: inline-block; animation: heartBeatAnimation 1.2s infinite; }
@@ -1257,32 +1185,26 @@
         .timeline-card:hover p { font-size: 1.04rem; }
 
         .timeline-img, .timeline-video-file {
-            width: 100%;
-            height: auto;
-            max-height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-top: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            border: 2px solid white;
-            box-sizing: border-box;
+            width: 100%; height: auto; max-height: 220px; object-fit: cover; border-radius: 8px;
+            margin-top: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 2px solid white; box-sizing: border-box;
         }
 
         /* Responsive Anpassungen */
         @media screen and (max-width: 992px) {
             .video-trigger-sidebar { position: static; transform: none !important; margin-top: 30px; opacity: 1; pointer-events: auto; }
         }
-
-        @media screen and (max-width: 900px) {
+        @media screen nickname (max-width: 900px) {
             .book { width: 90%; max-width: 340px; height: 460px; transform: none !important; }
             .book.opened { transform: none !important; }
             .book .page-click-zone-left { left: 0; }
             .book h3 { font-size: 2.2rem; }
             .book p { font-size: 1.1rem; }
         }
-
+        @media screen and (max-width: 850px) {
+            .interactive-media-container { flex-direction: column; align-items: center; }
+            .music-section, .daisy-section { width: 100%; max-width: 650px !important; }
+        }
         @media screen and (max-width: 820px) { .box-deko-container { display: none; } }
-
         @media screen and (max-width: 768px) {
             .timeline-container::after { left: 31px; }
             .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; }
@@ -1292,7 +1214,6 @@
             .timeline-card { max-width: 100%; }
             .timeline-arrow-down { left: 31px; transform: translateX(-50%); }
         }
-
         .polaroid-focus-left img { object-position: 20% center; }
     </style>
 </head>
@@ -1334,11 +1255,11 @@
                                 <div class="text-kasten">
                                     <h1>Happy Birthday, iki gözümün nuru ❤️</h1>
                                     <p>
-                                        Hayatına dokunabildiğim ve ilk doğum gününü yanında kutlayabildiğim için kendimi çok şanslı hissediyorum. 
+                                        Hayatına dokunabildiğim og ve ilk doğum gününü yanında kutlayabildiğim için kendimi çok şanslı hissediyorum. 
                                         Seninle geçen her an benim için tarifsiz derecede özel ve değerli. Gülüşün, sesin, bakışın… 
                                         Hepsi kalbimde ayrı bir yer bıraktı.<br><br>
                                         Bugün sadece senin doğduğun gün değil, aynı zamanda benim hayatımın da güzelleştiği günlerden biri. 
-                                        Bu küçük zaman kapsülü de birlikte yaşadığımız en güzel anıları, hisleri dairy ve sana olan sevgimi içinde saklıyor…
+                                        Bu küçük zaman kapsülü de birlikte yaşadığımız en güzel anıları, hisleri ve sana olan sevgimi içinde saklıyor…
                                     </p>
                                     <button class="weiter-btn" onclick="zeigeErinnerungen()">Anıları Gör ✨</button>
                                 </div>
@@ -1407,16 +1328,42 @@
                     <button class="reasons-btn" onclick="neuerGrund()">Bir Neden Göster ✨</button>
                 </div>
 
-                <div class="music-section">
-                    <h3>Bizim Şarkımız 🎵</h3>
-                    <div class="turntable-body" id="turntable" onclick="toggleMusic()">
-                        <div class="vinyl-record">
-                            <div class="vinyl-label-video">
-                                <video src="vinyl_video.mp4" autoplay loop muted playsinline></video>
-                                <div class="vinyl-center-hole"></div>
+                <h2 class="gallery-title" style="margin-top: 100px;">Bizim Şarkımız & Küçük Bir Oyun 🌸🎵</h2>
+
+                <div class="interactive-media-container">
+                    <div class="music-section">
+                        <h3>Bizim Şarkımız 🎵</h3>
+                        <div class="turntable-body" id="turntable" onclick="toggleMusic()">
+                            <div class="vinyl-record">
+                                <div class="vinyl-label-video">
+                                    <video src="vinyl_video.mp4" autoplay loop muted playsinline></video>
+                                    <div class="vinyl-center-hole"></div>
+                                </div>
+                            </div>
+                            <div class="turntable-arm"></div><div class="turntable-switch"></div>
+                        </div>
+                    </div>
+
+                    <div class="daisy-section">
+                        <h3 class="daisy-main-title">Seni Seviyor muyum? 🤔</h3>
+                        <div class="daisy-game-wrapper">
+                            <div class="daisy-status-text" id="daisyStatus">Bir yaprak kopar... 🌸</div>
+                            <div class="daisy-flower">
+                                <div class="daisy-center"></div>
+                                <div class="daisy-petal" style="transform: rotate(0deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(40deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(80deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(120deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(160deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(200deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(240deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(280deg);" onclick="pluckPetal(this)"></div>
+                                <div class="daisy-petal" style="transform: rotate(320deg);" onclick="pluckPetal(this)"></div>
+                            </div>
+                            <div class="daisy-final-message" id="daisyFinal">
+                                Sonsuza kadar çok seviyorum! ❤️✨
                             </div>
                         </div>
-                        <div class="turntable-arm"></div><div class="turntable-switch"></div>
                     </div>
                 </div>
 
@@ -1434,7 +1381,6 @@
                             <div class="page-click-zone-right" onclick="bookNavigate('right')"></div>
 
                             <div class="pages">
-                                
                                 <div class="page-wrapper w1" id="b1">
                                     <div class="page-front">
                                         <h2>Bizim Kitabımız</h2>
@@ -1443,7 +1389,7 @@
                                     </div>
                                     <div class="page-back">
                                         <h3>Aile 🤍</h3>
-                                        <p>"Canım kızımız, yeni yaşın sana sağlık ve mutluluk getirsin. Seninle her zaman gurur duyuyoruz. İyi ki doğdun, iyi ki varsın!"</p>
+                                        <p>"Canım kızımız, yeni yaşın sana sağlık und mutluluk getirsin. Seninle her zaman gurur duyuyoruz. İyi ki doğdun, iyi ki varsın!"</p>
                                         <span class="flip-hint">Sonraki Sayfa →</span>
                                     </div>
                                 </div>
@@ -1472,7 +1418,6 @@
                                         <p>"Sevginin etrafını sardığı, asla yalnız kalmayacağın bir ömre... <br><br>Büyük sürprizi sağ taraftaki butona basarak görebilirsin! 👉"</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
@@ -1481,7 +1426,6 @@
                             <span class="video-btn-label">Sürprizi Gör ✨</span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -1795,6 +1739,7 @@
             const modal = document.getElementById('surpriseVideoModal');
             const video = document.getElementById('surpriseVideo');
             video.pause();
+            modal.classList.remove('remove');
             modal.classList.remove('open');
             resetBook();
         }
@@ -1830,6 +1775,42 @@
         }
 
         window.addEventListener('scroll', checkTimelineScroll);
+
+        // PAPATYA LOGIK (GÄNSEBLÜMCHEN)
+        let pluckedCount = 0;
+        const totalPetals = 9;
+
+        function pluckPetal(petal) {
+            if (petal.classList.contains('petal-plucked')) return;
+
+            const currentRotation = petal.style.transform;
+            petal.style.setProperty('--rot', currentRotation.replace('rotate(', '').replace(')', ''));
+            
+            petal.classList.add('petal-plucked');
+            pluckedCount++;
+
+            const statusText = document.getElementById('daisyStatus');
+
+            if (pluckedCount % 2 !== 0) {
+                statusText.innerText = "Seviyor... ❤️";
+                statusText.style.color = "#fecfef";
+            } else {
+                statusText.innerText = "Sevmiyor... 💔";
+                statusText.style.color = "#ffffff";
+            }
+
+            if (pluckedCount === totalPetals) {
+                statusText.innerText = "Şüphen mi vardı? 😜";
+                statusText.style.color = "#ffeb3b";
+                
+                try {
+                    confetti({ particleCount: 80, spread: 60, origin: { y: 0.75 } });
+                } catch(e) {}
+
+                const finalMsg = document.getElementById('daisyFinal');
+                finalMsg.classList.add('visible');
+            }
+        }
     </script>
 </body>
 </html>
